@@ -1,0 +1,16 @@
+fastapi==0.109.0
+uvicorn==0.27.0.post1
+aif360==0.6.1
+fairlearn==0.10.0
+shap==0.44.0
+lime==0.2.0.1
+dice-ml==0.11
+google-cloud-aiplatform==1.39.0
+google-cloud-firestore==2.14.0
+pandas==2.2.0
+numpy==1.26.3
+pydantic==2.5.3
+python-multipart==0.0.6
+scikit-learn==1.4.0
+matplotlib==3.8.2
+jinja2==3.1.3

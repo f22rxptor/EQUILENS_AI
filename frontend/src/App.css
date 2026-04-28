@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+  --bg-deep: #000000;
+  --bg-card: rgba(10, 15, 25, 0.6);
+  --accent-blue: #0088ff;
+  --accent-glow: rgba(0, 136, 255, 0.4);
+  --text-white: #ffffff;
+  --text-dim: #94a3b8;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --sidebar-width: 80px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-white);
+  overflow-x: hidden;
+}
+
+/* Volumetric Lighting Effect - Modified for 3D Background */
+.app-container {
+  min-height: 300vh; /* Increased for scrolling */
+  position: relative;
+  background: transparent; /* 3D Canvas handles background */
+  width: 100vw;
+}
+
+.app-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 100px,
+    rgba(0, 136, 255, 0.02) 100px,
+    rgba(0, 136, 255, 0.02) 200px
+  );
+  mask-image: linear-gradient(to bottom, black, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Layout */
+.main-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: transparent;
+}
+
+.sidebar {
+  width: 90px;
+  background: rgba(10, 15, 25, 0.95);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 0;
+  gap: 2.5rem;
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.sidebar:hover {
+  width: 100px;
+  background: rgba(15, 20, 30, 0.98);
+}
+
+.sidebar-icon {
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 12px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-icon:hover, .sidebar-icon.active {
+  color: #0088ff;
+  background: rgba(0, 136, 255, 0.15);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 136, 255, 0.2);
+}
+
+.content-area {
+  flex: 1;
+  padding: 2rem 4rem 2rem calc(90px + 4rem);
+  z-index: 10;
+  width: 100%;
+}
+
+/* Navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-links span {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-links span:hover {
+  color: var(--text-white);
+}
+
+.btn-signin {
+  background: rgba(0, 136, 255, 0.1);
+  border: 1px solid var(--accent-blue);
+  color: var(--text-white);
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.update-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -2px;
+}
+
+.hero p {
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  font-size: 1.1rem;
+}
+
+.btn-primary-glow {
+  background: var(--accent-blue);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 0 20px var(--accent-glow);
+  transition: all 0.3s;
+}
+
+.btn-primary-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+/* Dashboard Component Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  background: rgba(5, 10, 20, 0.5);
+  padding: 2rem;
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card h3 {
+  font-size: 0.9rem;
+  color: var(--text-white);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.glow-effect {
+  animation: pulseGlow 4s infinite ease-in-out;
+}
