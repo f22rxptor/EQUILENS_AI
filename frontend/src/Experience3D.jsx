@@ -72,7 +72,7 @@ const Experience3D = () => {
     <div style={{ height: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0 }}>
       <Suspense fallback={<div style={{ color: 'white', padding: '2rem', background: '#000', height: '100vh' }}>Initializing Neural Core...</div>}>
         <Canvas camera={{ position: [0, 0, 5], fov: 75 }} gl={{ antialias: true }}>
-          <ScrollControls pages={3} damping={0.2}>
+          <ScrollControls pages={6} damping={0.2}>
             <Scene />
           </ScrollControls>
         </Canvas>

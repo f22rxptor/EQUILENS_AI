@@ -22,6 +22,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchData();
+    // Reset scroll to top on mount or hash change to empty
+    if (!window.location.hash || window.location.hash === '#hero') {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   const fetchData = async () => {
@@ -78,7 +82,7 @@ const Dashboard = () => {
   };
 
   const handleSignIn = () => {
-    setUser({ name: "Bobby Jacobs", email: "bobby@equilens.ai", role: "Lead Auditor" });
+    setUser({ name: "Anurag Lead", email: "23eg107f58@anurag.edu.in", role: "Lead Auditor" });
     setShowLogin(false);
   };
 
@@ -89,7 +93,9 @@ const Dashboard = () => {
       <div className="main-wrapper">
         {/* Sidebar */}
         <aside className="sidebar">
-          <ShieldCheck className="sidebar-icon active" size={32} />
+          <a href="#hero" style={{ color: 'inherit' }}>
+            <ShieldCheck className="sidebar-icon active" size={32} />
+          </a>
           <LayoutDashboard className="sidebar-icon" size={28} />
           <Database className="sidebar-icon" size={28} />
           <Activity className="sidebar-icon" size={28} />
@@ -103,16 +109,16 @@ const Dashboard = () => {
         <main className="content-area">
           <nav className="navbar">
             <div className="nav-links">
-              <span>About Us</span>
-              <span>FAQ</span>
-              <span>Blog</span>
-              <span>Contact</span>
+              <a href="#hero">Home</a>
+              <a href="#about">About Us</a>
+              <a href="#faq">FAQ</a>
+              <a href="#contact">Contact</a>
             </div>
-            <button className="btn-signin">Sign In</button>
+            <button className="btn-signin" onClick={() => setShowLogin(true)}>Sign In</button>
           </nav>
 
           {/* Hero Section */}
-          <section className="hero">
+          <section id="hero" className="hero">
             <div className="update-tag">EquiLens 2.0 is now live</div>
             <h1>EquiLens AI<br/>Audit Suite</h1>
             <p>Harnessing the power of algorithmic fairness to revolutionize industry standards and enhance human experiences.</p>
@@ -277,6 +283,72 @@ const Dashboard = () => {
                </div>
             </div>
           </div>
+
+          {/* About Us Section */}
+          <section id="about" className="info-section animate-fade" style={{ marginTop: '8rem', padding: '0 4rem' }}>
+            <div className="glass-card" style={{ padding: '4rem', display: 'flex', gap: '4rem', alignItems: 'center' }}>
+              <div style={{ flex: 1 }}>
+                <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', color: 'var(--text-white)' }}>Our Mission</h2>
+                <p style={{ fontSize: '1.1rem', color: 'var(--text-dim)', lineHeight: '1.8' }}>
+                  EquiLens AI is dedicated to dismantling systemic bias in algorithmic decision-making. 
+                  In a world increasingly governed by AI, we ensure that fairness isn't just an afterthought—it's the foundation. 
+                  Our suite of tools empowers auditors and developers to build technology that serves everyone equally, 
+                  aligning with UN SDG 10: Reduced Inequalities.
+                </p>
+              </div>
+              <div style={{ flex: 1, position: 'relative' }}>
+                 <div className="glow-effect" style={{ width: '100%', height: '200px', borderRadius: '20px', background: 'linear-gradient(135deg, rgba(0, 136, 255, 0.2), rgba(129, 140, 248, 0.1))', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <ShieldCheck size={100} color="var(--accent-blue)" />
+                 </div>
+              </div>
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              <a href="#hero" className="btn-signin" style={{ textDecoration: 'none' }}>↑ Back to Dashboard</a>
+            </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section id="faq" className="info-section" style={{ marginTop: '8rem', padding: '0 4rem' }}>
+            <h2 style={{ fontSize: '2rem', marginBottom: '3rem', textAlign: 'center', color: 'var(--text-white)' }}>Frequently Asked Questions</h2>
+            <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+              {[
+                { q: "How does the bias detection work?", a: "We use metrics like Disparate Impact and Equalized Odds to identify if certain demographic groups are unfairly penalized by your model." },
+                { q: "Is EquiLens open source?", a: "Yes, our core fairness engine is open source, allowing the community to audit and improve our own algorithms." },
+                { q: "What is the 4/5ths rule?", a: "It's a regulatory standard (EEOC) that identifies adverse impact if the selection rate for a group is less than 80% of the rate for the highest group." },
+                { q: "Can I integrate my own data?", a: "Absolutely. Our backend supports CSV, JSON, and direct database connections via our API." }
+              ].map((faq, i) => (
+                <div key={i} className="glass-card" style={{ padding: '2rem' }}>
+                  <h4 style={{ color: 'var(--accent-blue)', marginBottom: '1rem' }}>{faq.q}</h4>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-dim)' }}>{faq.a}</p>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+              <a href="#hero" className="btn-signin" style={{ textDecoration: 'none' }}>↑ Back to Dashboard</a>
+            </div>
+          </section>
+
+          {/* Contact Section */}
+          <section id="contact" className="info-section" style={{ marginTop: '8rem', padding: '0 4rem', paddingBottom: '10rem' }}>
+            <div className="glass-card" style={{ maxWidth: '800px', margin: '0 auto', padding: '4rem' }}>
+              <h2 style={{ fontSize: '2rem', marginBottom: '1rem', textAlign: 'center' }}>Get in Touch</h2>
+              <p style={{ textAlign: 'center', color: 'var(--text-dim)', marginBottom: '3rem' }}>
+                Have questions about AI ethics? Reach out to our lead auditor at <br/>
+                <span style={{ color: 'var(--accent-blue)', fontWeight: '600' }}>23eg107f58@anurag.edu.in</span>
+              </p>
+              <form style={{ display: 'grid', gap: '1.5rem' }} onSubmit={(e) => { e.preventDefault(); alert("Message sent! Our ethics team will get back to you."); }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                  <input type="text" placeholder="Your Name" className="glass-input" required />
+                  <input type="email" placeholder="Your Email" className="glass-input" required />
+                </div>
+                <textarea placeholder="Your Message" className="glass-input" rows="5" required></textarea>
+                <button type="submit" className="btn-primary-glow" style={{ width: '200px', margin: '0 auto' }}>Send Message</button>
+              </form>
+              <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+                <a href="#hero" className="btn-signin" style={{ textDecoration: 'none', background: 'transparent' }}>Return to Home</a>
+              </div>
+            </div>
+          </section>
         </main>
       </div>
 

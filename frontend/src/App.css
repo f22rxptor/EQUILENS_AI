@@ -22,6 +22,7 @@ body {
   background-color: var(--bg-deep);
   color: var(--text-white);
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /* Volumetric Lighting Effect - Modified for 3D Background */
@@ -117,18 +118,41 @@ body {
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 3.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.8rem 2.5rem;
+  border-radius: 30px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
 }
 
-.nav-links span {
-  font-size: 0.9rem;
+.nav-links a {
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--text-dim);
+  text-decoration: none;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.nav-links span:hover {
-  color: var(--text-white);
+.nav-links a:hover {
+  color: var(--accent-blue);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-blue);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .btn-signin {
@@ -226,4 +250,44 @@ body {
 
 .glow-effect {
   animation: pulseGlow 4s infinite ease-in-out;
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--text-white);
+  font-family: 'Outfit', sans-serif;
+  width: 100%;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.info-section h2 {
+  letter-spacing: -1px;
+}
+
+.animate-fade {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .info-section .glass-card {
+    flex-direction: column;
+    text-align: center;
+  }
 }
