@@ -27,8 +27,8 @@ const Dashboard = () => {
   const fetchData = async () => {
     try {
       const [biasRes, xaiRes] = await Promise.all([
-        axios.post('http://localhost:8000/audit/bias'),
-        axios.post('http://localhost:8000/audit/explain', { input: {} })
+        axios.post('https://equilens-ai.onrender.com/audit/bias'),
+        axios.post('https://equilens-ai.onrender.com/audit/explain', { input: {} })
       ]);
       setBiasData(biasRes.data);
       setXaiData(xaiRes.data);
